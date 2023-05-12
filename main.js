@@ -75,6 +75,21 @@ function loadSound(url, callback) {
 }
 
 
+function playSound(buffer) {
+  const source = audioContext.createBufferSource();
+  source.buffer = buffer;
+  source.connect(audioContext.destination);
+  source.start(0);
+}
+
+function playSpaceSound(buffer) {
+  const source = audioContext.createBufferSource();
+  source.buffer = buffer;
+  source.loop = true;
+  source.connect(audioContext.destination);
+  source.start(0);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   loadSound('portfolio_intro.mp3', function (buffer) {
     collisionSoundBuffer = buffer;
@@ -82,16 +97,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   loadSound('space.mp3', function (buffer) {
     spaceBuffer = buffer;
+    playSpaceSound(spaceBuffer);
   });
 });
 
 
-function playSound(buffer) {
-  const source = audioContext.createBufferSource();
-  source.buffer = buffer;
-  source.connect(audioContext.destination);
-  source.start(0);
-}
 
 const planetInfoBoxes = [
   {
@@ -180,7 +190,6 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   spacecraft = new Spacecraft();
-  playSound(spaceBuffer);
   cursorCanvas = createGraphics(windowWidth, windowHeight);
   cursorCanvas.position(0, 0);
 
