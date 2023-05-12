@@ -321,7 +321,7 @@ function draw() {
   image(backgroundImage, 0, 0, width, height);
   pop();
 
-  planetRotationY += 5; 
+  planetRotationY += 0.002; 
   ambientLight(50);
   rotateY(9);
   //pointLight(255, 255, 255, mouseX - width / 2, mouseY - height / 2, 200);
@@ -551,7 +551,7 @@ function displayPlanet() {
   for (let i = 0; i < 4; i++) {
     pointLight(255, 255, 255, lightX, lightY, lightZ);
   }
-  rotate(9);
+  rotateY(planetRotationY);
   noStroke();
   sphere(280); // Adjust the size of the planet
   pop();
